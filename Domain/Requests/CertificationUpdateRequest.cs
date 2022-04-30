@@ -1,8 +1,6 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Domain.Aggregates
+﻿namespace Domain.Requests
 {
-    public class Certification
+    public class CertificationUpdateRequest
     {
         public int Id { get; set; }
         public Guid Code { get; set; }
@@ -10,6 +8,5 @@ namespace Domain.Aggregates
         public string? URL { get; set; }
         public DateTime? AchievementDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
-        [JsonIgnore] public Candidate? Candidate { get; set; }
     }
 }

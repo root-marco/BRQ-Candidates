@@ -12,10 +12,7 @@ namespace Domain.Aggregates
         public string? Phone { get; set; }
         public Gender? Gender { get; set; }
         public DateTime? BirthDate { get; set; }
-        
-        [NotMapped]
-        public IList<Skill>? Skills { get; set; }
-        [NotMapped]
-        public IList<Certification>? Certifications { get; set; }
+        [NotMapped] public IList<Skill>? Skills { get; set; }
+        [NotMapped] public IList<Certification>? Certifications { get; set; }
     }
 }
