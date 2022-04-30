@@ -13,10 +13,12 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpGet, Route("{name}")]
+        [HttpGet, Route("name/{name}")]
         public async Task<IActionResult> GetCandidatesByName(string name)
         {
             var candidates = await _context.Candidates
+                .Include(x => x.Skills)
+                .Include(x => x.Certifications)
                 .Where(x => x.Name.ToLower().Contains(name.ToLower()))
                 .ToListAsync();
 
@@ -28,10 +30,12 @@ namespace API.Controllers
             return Ok(candidates);
         }
 
-        [HttpGet, Route("{cpf}")]
+        [HttpGet, Route("cpf/{cpf}")]
         public async Task<IActionResult> GetCandidateByCPF(string cpf)
         {
             var candidate = await _context.Candidates
+                .Include(x => x.Skills)
+                .Include(x => x.Certifications)
                 .Where(x => x.SocialSecurityNumber == cpf)
                 .FirstOrDefaultAsync();
 
@@ -43,10 +47,12 @@ namespace API.Controllers
             return Ok(candidate);
         }
 
-        [HttpGet, Route("{email}")]
+        [HttpGet, Route("email/{email}")]
         public async Task<IActionResult> GetCandidatesByEmail(string email)
         {
             var candidates = await _context.Candidates
+                .Include(x => x.Skills)
+                .Include(x => x.Certifications)
                 .Where(x => x.Email.ToLower().Contains(email.ToLower()))
                 .ToListAsync();
 
@@ -58,10 +64,12 @@ namespace API.Controllers
             return Ok(candidates);
         }
 
-        [HttpGet, Route("{skillName}")]
+        [HttpGet, Route("skillName/{skillName}")]
         public async Task<IActionResult> GetCandidatesBySkillName(string skillName)
         {
             var candidates = await _context.Candidates
+                .Include(x => x.Skills)
+                .Include(x => x.Certifications)
                 .Where(x => x.Skills.Select(x => x.Name).Contains(skillName))
                 .ToListAsync();
 

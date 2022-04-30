@@ -5,11 +5,7 @@ namespace Repository
 {
     public sealed class RepositoryContext : DbContext
     {
-        public RepositoryContext(DbContextOptions<RepositoryContext> options)
-            : base(options)
-        {
-        }
-
+        public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options) { }
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Certification> Certifications { get; set; }
@@ -23,12 +19,12 @@ namespace Repository
             modelBuilder.Entity<Skill>()
                 .HasOne(x => x.Candidate)
                 .WithMany(x => x.Skills)
-                .HasForeignKey("SkillId");
+                .HasForeignKey("CandidateId");
 
             modelBuilder.Entity<Certification>()
                 .HasOne(x => x.Candidate)
                 .WithMany(x => x.Certifications)
-                .HasForeignKey("CertificationId");
+                .HasForeignKey("CandidateId");
         }
     }
 }
