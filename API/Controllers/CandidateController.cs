@@ -41,6 +41,19 @@ namespace API.Controllers
             return Ok(candidates);
         }
 
+        [HttpGet, Route("candidate/{candidateId}")]
+        public async Task<IActionResult> GetOneCandidate(int candidateId)
+        {
+            var candidate = await _context.Candidates.SingleOrDefaultAsync(x => x.Id == candidateId);
+
+            if (candidate is null)
+            {
+                return NotFound("Candidate not found");
+            }
+
+            return Ok(candidate);
+        }
+
         [HttpGet, Route("search")]
         public async Task<IActionResult> SearchCandidates([FromQuery(Name = "query")] string query)
         {
